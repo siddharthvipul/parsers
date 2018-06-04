@@ -2,20 +2,16 @@
 '''
 doc-string holder
 '''
-
-
 import re
 import argparse
 import csv
 import os.path
-
 
 def shred_digit(line):
     '''
     This function fetches numbers from a line
     '''
     return re.findall(r'\d+.\d+', line)
-
 
 def find_pattern(file_name):
     '''
@@ -71,8 +67,6 @@ def main():
             print(result)
     else:
         parser.print_help()
-
-
 
 if __name__ == '__main__':
     main()
