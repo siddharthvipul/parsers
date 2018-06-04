@@ -1,7 +1,8 @@
+#!/usr/bin/python3
 '''
 doc-string holder
 '''
-#!/usr/bin/python3
+
 
 import re
 import argparse
