@@ -58,7 +58,7 @@ def main():
     parser.add_argument('-o', '--output', type=str, help=output_help)
     args = parser.parse_args()
 
-    if os.path.isfile(args.input):
+    if args.input and os.path.isfile(args.input):
         result = find_pattern(args.input)
         print(result)
         if args.output:
@@ -69,6 +69,8 @@ def main():
                 write_to_csv(result, args.output)
         else:
             print(result)
+    else:
+        parser.print_help()
 
 
 
