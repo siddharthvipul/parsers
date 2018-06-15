@@ -1,4 +1,3 @@
-
 '''
 Fio commands
 
@@ -43,7 +42,8 @@ data = {jobName:[write_row_numbers], jobname:[read_row_numbers]}
 example:
 data = {'readtest': [108676, 17992, 140, 58277, 7102.775, 17748, 613505]
 '''
-import sys
+import csv
+import argparse
 
 def get_data(inventory, file_path):
     '''
@@ -75,17 +75,35 @@ def get_data(inventory, file_path):
     except IOError:
         print("File not found")
 
+def write_file(inventory, filename):
+    '''
+    takes dictionary as input and writes it in a csv file of given name
+    '''
+    with open(filename, 'w+') as csv_file:
+       # writer = csv.writer(csv_file)
+        for key in inventory:
+            row = key+',' + ','.join(inventory[key])+'\n'
+            csv_file.write(row)
+
+
 def main():
     '''
     * takes file name as an argument
     * passes included columns with other parameters
     * prints data
     '''
-    filename = sys.argv[1]
+    input_help = 'fio output dump file'
+    output_help = 'parse and store data in this file name'
+
+    parser = argparse.ArgumentParser(description='fio Parser(--minimal or --output-format = terse)')
+    parser.add_argument('-i', '--input', type=str, help=input_help)
+    parser.add_argument('-o', '--output', type=str, help=output_help)
+    args = parser.parse_args()
     inventory = dict()
-    result = get_data(inventory, filename)
+    result = get_data(inventory, args.input)
     if result:
         print(result)
+        write_file(result, args.output)
 
 if __name__ == '__main__':
     main()
