@@ -101,9 +101,10 @@ def main():
     args = parser.parse_args()
     inventory = dict()
     result = get_data(inventory, args.input)
-    if result:
-        print(result)
+    if result and args.output:
         write_file(result, args.output)
+    elif result:
+        print(result)
 
 if __name__ == '__main__':
     main()
