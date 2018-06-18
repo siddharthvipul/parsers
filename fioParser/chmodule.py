@@ -1,9 +1,8 @@
 '''
 This program is a test program for modules
 '''
-import parser_auto as pa
-inventory = dict()
-print(pa.get_data(inventory, 'outputFioRead.csv'))
+import parser_auto_file as pa
+print(pa.get_data('outputFioRead.csv'))
 
 #MODS:
 # if read/write passed instead of , change it accordingly

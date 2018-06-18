@@ -1,3 +1,4 @@
+
 '''
 Fio commands
 
@@ -37,7 +38,7 @@ write_data = [47, 48, 49, 50, 57, 86], columns from csv
 Code variable explanation
 =========================
 
-job_name = cells[2], column from csv
+job_name = row[2], column from csv
 data = {jobName:[write_row_numbers], jobname:[read_row_numbers]}
 example:
 data = {'readtest': [108676, 17992, 140, 58277, 7102.775, 17748, 613505]
@@ -58,20 +59,18 @@ def get_data(file_path):
     counter = '0'
     try:
         with open(file_path, "r") as file_object:
-            file_reader = csv.reader(file_object, delimiter=' ')
+            file_reader = csv.reader(file_object, delimiter=';')
             for row in file_reader:
-                print(type(row))
-                cells = row[0].split(';')
-                if cells[5] != '0':
+                if row[5] != '0':
                     for each_column in included_cols_read:
-                        data.append(cells[each_column])
+                        data.append(row[each_column])
                     counter = str(int(counter)+1)
-                    inventory[cells[2]+counter] = data
-                if cells[46] != '0':
+                    inventory[row[2]+counter] = data
+                if row[46] != '0':
                     for each_column in included_cols_write:
-                        data.append(cells[each_column])
+                        data.append(row[each_column])
                     counter = str(int(counter)+1)
-                    inventory[cells[2]+counter] = data
+                    inventory[row[2]+counter] = data
                 data = []
         return inventory
 
