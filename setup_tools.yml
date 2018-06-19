@@ -1,0 +1,14 @@
+
+---
+- hosts: localhost
+  tasks:
+
+  - name: Install fio packages
+    yum:
+      name: {{ item }}
+      state: installed
+      with_items:
+        - fio
+
+  - name: clone smallfile and iozone
+...
