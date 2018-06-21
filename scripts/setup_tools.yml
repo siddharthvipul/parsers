@@ -1,0 +1,30 @@
+---
+- hosts: localhost
+  tasks:
+
+  - name: Install fio packages
+    yum:
+      name: fio
+      state: installed
+
+  - name: Install yum-plugin-copr
+    yum:
+      name: yum-plugin-copr
+      state: installed
+
+  - name: Enable COPR for IOZone
+    yum_repository:
+      name: siddharthvipul_copr_IOZone
+      description: siddharthvipul1/IOZONE for iozone
+      baseurl: https://copr-be.cloud.fedoraproject.org/results/siddharthvipul1/IOZone/epel-7-$basearch/
+
+  - name: install iozone
+    yum:
+      name: iozone
+      state: installed
+
+  - name: cloning smallfile
+    git:
+      repo: https://github.com/bengland2/smallfile.git
+      dest: /home/smallfile
+...
