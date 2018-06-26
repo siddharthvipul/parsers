@@ -88,7 +88,6 @@ def write_file(inventory, filename):
             row = key+',' + ','.join(inventory[key])+'\n'
             csv_file.write(row)
 
-
 def main():
     '''
     * takes file name as an argument
